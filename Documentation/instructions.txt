@@ -1,0 +1,67 @@
+Instructions:
+-------------
+
+1. Repository setup
+    * Fork the Repository at https://github.com/LibreHealthIO/lh-ehr-laravel-port.git
+    * Clone your fork of the Repository from your GitHub account at https://github.com/your_username/lh-ehr-laravel-port.git
+        - Command to clone fork: 'git clone https://github.com/your_username/lh-ehr-laravel-port.git'
+    * Add your upstream and origin remotes
+        - command to add upstream --> 'git remote add upstream https://github.com/LibreHealthIO/lh-ehr-laravel-port.git'
+        - command to add origin --> 'git remote add origin https://github.com/your_username/lh-ehr-laravel-port.git'
+
+2. Ensure to have the following dependencies
+    * PHP 7.0 (7.0.* is required for LibreEHR)
+    * OpenSSL PHP Extension
+    * PDO PHP Extension
+    * Mbstring PHP Extension
+    * composer
+
+3. Installing Composer
+    * Run 'sudo apt update' in the terminal
+    * Run 'sudo apt install curl php7.0-cli php7.0-mbstring git unzip'
+    * 'cd~'
+    * 'curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer'
+    * Test the installation by running 'composer' in the terminal
+    * Ensure that your home/'username'/.config/ folder is  writtable
+
+3. Run the command below to install Laravel globally via Laravel Installer
+    'composer global require "laravel/installer"'
+
+4. Now we have to add global access
+    * Open .bashrc by running this command 'sudo gedit .bashrc'. Feel free to use anything other than gedit. You'll be prompted to enter your password.
+    * Add this line at the end of the file and save it
+      'PATH="$PATH:$HOME/.config/composer/vendor/bin"'
+    * Run this command after saving the .bashrc file
+       'source ~/.bashrc'
+
+5. Navigate to lh-ehr-laravel-port directory
+    'cd lh-ehr-laravel-port'
+
+6. Add you .env file by running this command: 'cp .env.example .env'
+
+7. Add your .env file to .gitignore filename. // It is already, just check!
+
+8. Generate key for your application by running the command below
+    'php artisan key:generate'
+   Observe that the key is inserted in your .env file.
+
+9. Edit your database name, username and password in your .env file
+    DB_DATABASE = your_db_name
+    DB_USERNAME = your_username
+    DB_PASSWORD = your_password
+
+10. Now, you can create the database by running
+    'php artisan make:database'
+
+11. Create tables by running
+    'php artisan migrate'
+
+12. You can seed the database width
+    'php artisan db:seed'
+
+13. Start the application by running the command below in the terminal:
+        'php artisan serve'
+
+14. Head over to your browser and access http://localhost:8000 or 127.0.0.1:8000
+
+15. You can also check your database at http://localhost/phpmyadmin/
