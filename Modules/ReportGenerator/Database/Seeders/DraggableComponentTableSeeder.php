@@ -1,11 +1,15 @@
 <?php
 
+/* Use this to seed draggable_components table.
+ * Copyright 2018 Tigpezeghe Rodrige K. <tigrodrige@gmail.com>
+ * */
+
 namespace Modules\ReportGenerator\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class ReportGeneratorDatabaseSeeder extends Seeder
+class DraggableComponentTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,8 +19,7 @@ class ReportGeneratorDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        $this->call(DraggableComponentTableSeeder::class);
-        $this->call(ReportFormatTableSeeder::class);
+        factory("../../". Entities\DraggableComponent::class, 25)->create();
         // $this->call("OthersTableSeeder");
     }
 }

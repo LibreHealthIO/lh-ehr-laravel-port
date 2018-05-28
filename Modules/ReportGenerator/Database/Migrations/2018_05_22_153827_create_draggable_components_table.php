@@ -19,7 +19,7 @@ class CreateDraggableComponentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('draggable_components', function (Blueprint $table) {
+        Schema::connection('mysql_report_generator')->create('draggable_components', function (Blueprint $table) {
             $table->increments('id')->comment = "This will identify each component with a unique integer.";
             $table->string('option_id', 255)->comment = "All draggable components have an ID.";
             $table->boolean('is_default')->default(1)->comment = "0 -> False, 1 -> True.";

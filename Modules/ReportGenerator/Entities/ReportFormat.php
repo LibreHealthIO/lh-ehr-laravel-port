@@ -1,4 +1,13 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| ReportFormat Model
+|--------------------------------------------------------------------------
+|
+| This is the model for ReportFormat table.
+| Copyright 2018 Tigpezeghe Rodrige K. <tigrodrige@gmail.com>
+|
+*/
 
 namespace Modules\ReportGenerator\Entities;
 
@@ -18,9 +27,9 @@ class ReportFormat extends Model
     ];
 
     /**
-     * The connection name for the model.
+     * The database connection name for ReportFormat model.
      * TODO
      * @var string
      */
-    //protected $connection = 'connection-name';
+    protected $connection = 'mysql_report_generator';
 }

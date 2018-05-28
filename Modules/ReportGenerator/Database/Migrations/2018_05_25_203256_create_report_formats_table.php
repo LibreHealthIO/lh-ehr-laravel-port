@@ -19,7 +19,7 @@ class CreateReportFormatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('report_formats', function (Blueprint $table) {
+        Schema::connection('mysql_report_generator')->create('report_formats', function (Blueprint $table) {
             $table->increments('id')->comment = "This will identify each component with a unique integer.";
             $table->string('user', 255)->default('default')->comment = "The user who created the report format. This will be 'default' for components that come with the module.";
             $table->string('title', 255)->comment = "This is the report name e.g Patient List.";
