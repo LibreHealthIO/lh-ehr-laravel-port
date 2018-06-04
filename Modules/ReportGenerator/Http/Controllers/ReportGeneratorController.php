@@ -1,10 +1,21 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| Report generator controller. 
+|--------------------------------------------------------------------------
+|
+| This is the main controller for this report generator module.
+| Copyright 2018 Tigpezeghe Rodrige K. <tigrodrige@gmail.com>
+|
+*/
 
 namespace Modules\ReportGenerator\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+
+use Modules\ReportGenerator\Entities\DraggableComponent as DraggableComponent;
 
 class ReportGeneratorController extends Controller
 {
@@ -14,7 +25,14 @@ class ReportGeneratorController extends Controller
      */
     public function index()
     {
-        return view('reportgenerator::index');
+        $draggableComponents = DraggableComponent::all();
+
+        foreach ($draggableComponents as $draggableComponent) {
+            print_r($draggableComponent->title);
+            echo '<br>';
+        }
+
+        //return view('reportgenerator::index');
     }
 
     /**

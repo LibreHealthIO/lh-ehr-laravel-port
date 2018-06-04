@@ -12,6 +12,7 @@
 namespace Modules\ReportGenerator\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\ReportGenerator\Entities\DraggableComponent as DraggableComponent;
 
 class ReportFormat extends Model
 {
@@ -32,4 +33,15 @@ class ReportFormat extends Model
      * @var string
      */
     protected $connection = 'mysql_report_generator';
+
+    /**
+    * The draggable components that belong to the Report Format.
+    *
+    * @return Response
+    */
+    public function draggable_components()
+    {
+        return $this->belongsToMany('DraggableComponent')->withTimestamps();
+    }
+
 }
