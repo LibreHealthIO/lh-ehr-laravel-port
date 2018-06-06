@@ -27,12 +27,14 @@ class ReportGeneratorController extends Controller
     {
         $draggableComponents = DraggableComponent::all();
 
-        foreach ($draggableComponents as $draggableComponent) {
+        return view('reportgenerator::index')->with('draggableComponents', $draggableComponents);
+
+        /* foreach ($draggableComponents as $draggableComponent) {
             print_r($draggableComponent->title);
             echo '<br>';
         }
 
-        //return view('reportgenerator::index');
+        return view('reportgenerator::index'); */
     }
 
     /**

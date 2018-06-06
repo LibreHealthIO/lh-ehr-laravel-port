@@ -81,7 +81,7 @@
                         </div>
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body" id="second">
-                                <p class="note">Why am I stil empty?</p>
+                                <p class="note">Why am I still empty?</p>
                             </div>
                         </div>
                     </div>
@@ -96,31 +96,14 @@
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
                                 <p class="note">Frequently used columns</p>
-                                <div class="row">
-                                    <div class="col-sm-3" id="draggable"><p>I am one</p></div>
-                                    <div class="col-sm-3" id="draggable"><p>I am two</p></div>
-                                    <div class="col-sm-3" id="draggable"><p>I am three</p></div>
-                                    <div class="col-sm-3" id="draggable"><p>I am four</p></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-3" id="draggable"><p>I am five</p></div>
-                                    <div class="col-sm-3" id="draggable"><p>I am six</p></div>
-                                    <div class="col-sm-3" id="draggable"><p>I am seven</p></div>
-                                    <div class="col-sm-3" id="draggable"><p>I am eight</p></div>
-                                </div>
-                                <hr />
-                                <p class="note">All columns that concern reports</p>
-                                <div class="row">
-                                    <div class="col-sm-3" id="draggable"><p>I am one</p></div>
-                                    <div class="col-sm-3" id="draggable"><p>I am two</p></div>
-                                    <div class="col-sm-3" id="draggable"><p>I am three</p></div>
-                                    <div class="col-sm-3" id="draggable"><p>I am four</p></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-3" id="draggable"><p>I am five</p></div>
-                                    <div class="col-sm-3" id="draggable"><p>I am six</p></div>
-                                    <div class="col-sm-3" id="draggable"><p>I am seven</p></div>
-                                    <div class="col-sm-3" id="draggable"><p>I am eight</p></div>
+                                <div class="row" id="draggable-column">
+                                    @foreach ($draggableComponents as $draggableComponent)
+                                        <div class="col-sm-2 wordwrap draggable" id="{{ $draggableComponent->title }}">
+                                            <p data-toggle="tooltip" data-placement="top" title="{{ $draggableComponent->title }}">
+                                                {{ $draggableComponent->title }}
+                                            </p>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
