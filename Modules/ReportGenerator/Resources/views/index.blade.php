@@ -1,5 +1,7 @@
 @extends('reportgenerator::layouts.master')
 
+@section('title', 'Report Generator')
+
 @section('content')
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
         <!-- The button below opens the add system feature modal below. -->
@@ -98,7 +100,7 @@
                                 <p class="note">Frequently used columns</p>
                                 <div class="row" id="draggable-column">
                                     @foreach ($draggableComponents as $draggableComponent)
-                                        <div class="col-sm-2 wordwrap draggable" id="{{ $draggableComponent->title }}">
+                                        <div class="col-sm-2 wordwrap draggable" id="{{ $draggableComponent->option_id }}">
                                             <p data-toggle="tooltip" data-placement="top" title="{{ $draggableComponent->title }}">
                                                 {{ $draggableComponent->title }}
                                             </p>
@@ -166,4 +168,4 @@
             </div>
         </div>
     </div><!-- /#add-system-feature -->
-@stop
+@endsection

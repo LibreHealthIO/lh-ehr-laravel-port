@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Tigpezeghe Rodrige K. @ tigrodrige@gmail.com">
         <metan name="description" content="GSoC2018: Building a report generator for LibreHealthEHR">
-        <title>Report Generator - LibreEHR</title>
+        <title>@yield('title') - LibreHealthEHR</title>
 
         <!-- Custom app.css in public/assets/css -->
         <link rel="stylesheet" href="{{URL::asset('assets/css/master.css')}}">

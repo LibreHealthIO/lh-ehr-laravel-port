@@ -1,7 +1,7 @@
 <?php
 /*
 |--------------------------------------------------------------------------
-| Report generator controller. 
+| Report generator controller.
 |--------------------------------------------------------------------------
 |
 | This is the main controller for this report generator module.
@@ -26,15 +26,21 @@ class ReportGeneratorController extends Controller
     public function index()
     {
         $draggableComponents = DraggableComponent::all();
-
         return view('reportgenerator::index')->with('draggableComponents', $draggableComponents);
+    }
 
-        /* foreach ($draggableComponents as $draggableComponent) {
-            print_r($draggableComponent->title);
-            echo '<br>';
-        }
-
-        return view('reportgenerator::index'); */
+    /**
+     * Show the generated report.
+     * @return Response
+     */
+    public function getComponents()
+    {
+      $option_ids = Input::get($option_ids); // returns an array
+      // use ids to get the draggable components notes
+      // use notes to get the table columns
+      // send the data to the view
+      //return view('reportgenerator::report')->with('ids', $option_ids);
+      return url('reportgenerator/showReport');
     }
 
     /**
