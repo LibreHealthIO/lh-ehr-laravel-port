@@ -1,10 +1,21 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| Report generator controller.
+|--------------------------------------------------------------------------
+|
+| This is the main controller for this report generator module.
+| Copyright 2018 Tigpezeghe Rodrige K. <tigrodrige@gmail.com>
+|
+*/
 
 namespace Modules\ReportGenerator\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+
+use Modules\ReportGenerator\Entities\DraggableComponent as DraggableComponent;
 
 class ReportGeneratorController extends Controller
 {
@@ -14,7 +25,22 @@ class ReportGeneratorController extends Controller
      */
     public function index()
     {
-        return view('reportgenerator::index');
+        $draggableComponents = DraggableComponent::all();
+        return view('reportgenerator::index')->with('draggableComponents', $draggableComponents);
+    }
+
+    /**
+     * Show the generated report.
+     * @return Response
+     */
+    public function getComponents()
+    {
+      $option_ids = Input::get($option_ids); // returns an array
+      // use ids to get the draggable components notes
+      // use notes to get the table columns
+      // send the data to the view
+      //return view('reportgenerator::report')->with('ids', $option_ids);
+      return url('reportgenerator/showReport');
     }
 
     /**

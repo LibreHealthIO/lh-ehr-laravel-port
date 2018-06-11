@@ -37,9 +37,9 @@ Instructions:
 5. Navigate to lh-ehr-laravel-port directory
     'cd lh-ehr-laravel-port'
 
-6. Add you .env file by running this command: 'cp .env.example .env'
+6. Add your .env file by running this command: 'cp .env.example .env'
 
-7. Add your .env file to .gitignore filename. // It is already, just check!
+7. Add your .env file to .gitignore filename. // It is already there, just check!
 
 8. Generate key for your application by running the command below
     'php artisan key:generate'
@@ -57,7 +57,8 @@ Instructions:
     'php artisan migrate'
 
 12. You can seed the database width
-    'php artisan db:seed'
+    'php artisan db:seed' // This shouldn't work for now.
+    If seeding fails, then use the librereportgenerator.sql file in this directory to import sample data.
 
 13. Start the application by running the command below in the terminal:
         'php artisan serve'
