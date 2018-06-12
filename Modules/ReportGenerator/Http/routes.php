@@ -6,5 +6,5 @@ Route::group(['middleware' => 'web', 'prefix' => 'reportgenerator', 'namespace' 
 
     Route::get('/generate', 'ReportGeneratorController@getComponents');
 
-    Route::get('/showReport', 'ReportGeneratorController@showReport');
+    Route::get('/report/{option_ids}', 'ReportGeneratorController@showReport');
 });

@@ -3,7 +3,7 @@
 @section('title', 'Report Generator')
 
 @section('content')
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning" style="background-color:#fd7e14 !important">
         <!-- The button below opens the add system feature modal below. -->
         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add-system-feature">Add system feature</button>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,19 +73,22 @@
     </nav><!-- /.navbar -->
     &nbsp;
     <div class="container">
+      <div class="alert alert-success" style="display:none"></div>
         <div class="row">
             <div class="col-sm-6">
                 <div id="accordion">
                     <div class="card">
-                        <div class="card-header" id="headingOne">
-                            <h5 class="mb-0"><b>Drop columns here</b>
-                            <button type="button" name="submit" class="btn btn-info" id="generate-button">Generate report</button></h5>
-                        </div>
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                            <div class="card-body" id="second">
-                                <p class="note">Why am I still empty?</p>
+                        <form id="dropForm">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0"><b>Drop columns here</b>
+                                <button type="button" name="submit" class="btn btn-info" id="generate-button">Generate report</button></h5>
                             </div>
-                        </div>
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body" id="second">
+                                    <p class="note">Why am I still empty?</p>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

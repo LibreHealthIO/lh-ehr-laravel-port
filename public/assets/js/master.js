@@ -43,19 +43,32 @@ function generate(IDs) {
     return i == IDs.indexOf(item);
   });
   console.log(option_ids);
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+    }
+  });
   $.ajax({
     url: 'reportgenerator/generate',
-    type: 'GET',
+    type: 'get',
     data: { ids: option_ids },
     dataType: 'json',
     success: function(response){
-      alert("You've successfully sent the unique ids");
+      console.log(response);
+      //alert("You've successfully sent the unique ids");
+      jQuery('.alert').show();
+      jQuery('.alert').html(response.option_ids);
+      window.location.href = response.redirecturl; // your action should return an object having [redirecturl] property
+    },
+    error: function (httpRequest, textStatus, errorThrown) {  // detailed error messsage
+      alert("Error: " + textStatus + " " + errorThrown + " " + httpRequest);
     }
   });
 }
 
 $(document).ready(function() {
-  $('#generate-button').click(function() {
+  $('#generate-button').click(function(e) {
+    e.preventDefault();
     if (jQuery.isEmptyObject(IDs)) { // check if the user has dropped any component before trying to generate a report
       alert("Please drag and drop components before you can generate a report!");
     } else {

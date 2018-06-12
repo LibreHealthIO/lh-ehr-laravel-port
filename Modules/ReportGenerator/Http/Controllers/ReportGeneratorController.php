@@ -33,14 +33,25 @@ class ReportGeneratorController extends Controller
      * Show the generated report.
      * @return Response
      */
-    public function getComponents()
+    public function getComponents(Request $request)
     {
-      $option_ids = Input::get($option_ids); // returns an array
+      $option_ids = $request->ids; // returns an array
       // use ids to get the draggable components notes
       // use notes to get the table columns
       // send the data to the view
       //return view('reportgenerator::report')->with('ids', $option_ids);
-      return url('reportgenerator/showReport');
+      $option_ids = serialize($option_ids);
+      return response()->json([
+          'redirecturl' => 'http://localhost:8000/reportgenerator/report/'.$option_ids,
+          'success' => 'Received IDs',
+          'option_ids' => $option_ids
+      ]);
+    }
+
+    public function showReport($option_ids)
+    {
+      $option_ids = unserialize($option_ids);
+      return view('reportgenerator::report')->with('option_ids', $option_ids);
     }
 
     /**
