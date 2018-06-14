@@ -5,6 +5,8 @@
 |--------------------------------------------------------------------------
 |
 | This is the main controller for this report generator module.
+|
+| @author Tigpezeghe Rodrige K. <tigrodrige@gmail.com>
 | Copyright 2018 Tigpezeghe Rodrige K. <tigrodrige@gmail.com>
 |
 */
@@ -39,10 +41,14 @@ class ReportGeneratorController extends Controller
       // use ids to get the draggable components notes
       // use notes to get the table columns
       // send the data to the view
-      //return view('reportgenerator::report')->with('ids', $option_ids);
+      $protocol_host = 'http://' . $_SERVER['HTTP_HOST'];
+      if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+        $protocol_host = 'https://' . $_SERVER['HTTP_HOST'];
+      }
+
       $option_ids = serialize($option_ids);
       return response()->json([
-          'redirecturl' => 'http://localhost:8000/reportgenerator/report/'.$option_ids,
+          'redirecturl' => $protocol_host.'/reportgenerator/report/'.$option_ids,
           'success' => 'Received IDs',
           'option_ids' => $option_ids
       ]);

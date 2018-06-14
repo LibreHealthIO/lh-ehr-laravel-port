@@ -17,12 +17,12 @@ Instructions:
     * composer
 
 3. Installing Composer
-    * Run 'sudo apt update' in the terminal
+    * Run 'sudo apt update' in the terminal.
     * Run 'sudo apt install curl php7.0-cli php7.0-mbstring git unzip'
     * 'cd~'
     * 'curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer'
-    * Test the installation by running 'composer' in the terminal
-    * Ensure that your home/'username'/.config/ folder is  writtable
+    * Test the installation by running 'composer' in the terminal.
+    * Ensure that your home/'username'/.config/ folder is writtable.
 
 3. Run the command below to install Laravel globally via Laravel Installer
     'composer global require "laravel/installer"'
@@ -50,8 +50,15 @@ Instructions:
     DB_USERNAME = your_username
     DB_PASSWORD = your_password
 
+    DB_REPORT_GENERATOR_DATABASE=homestead
+    DB_REPORT_GENERATOR_USERNAME=homestead
+    DB_REPORT_GENERATOR_PASSWORD=secret
+
 10. Now, you can create the database by running
-    'php artisan make:database'
+    'php artisan make:database' // Subsequently, this will create both databases automatically.
+
+    For now you have to create two databases manually. These databases should have the same
+    names as those specified in DB_DATABASE and DB_REPORT_GENERATOR_DATABASE
 
 11. Create tables by running
     'php artisan migrate'

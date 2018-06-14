@@ -70,7 +70,7 @@ $(document).ready(function() {
   $('#generate-button').click(function(e) {
     e.preventDefault();
     if (jQuery.isEmptyObject(IDs)) { // check if the user has dropped any component before trying to generate a report
-      alert("Please drag and drop components before you can generate a report!");
+      alert("Cannot generate a blank report! You must add at least one component.");
     } else {
       generate(IDs); // Call the generate function above when the generate button is clicked
     }

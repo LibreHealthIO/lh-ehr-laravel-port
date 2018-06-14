@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Tigpezeghe Rodrige K. @ tigrodrige@gmail.com">
-        <meta name="description" content="GSoC2018: Building a report generator for LibreHealthEHR">
+        <meta name="description" content="LibreHealthEHR Report generator">
         <title>@yield('title') - LibreHealthEHR</title>
 
         <!-- Custom app.css in public/assets/css -->

@@ -1,10 +1,10 @@
 <?php
 /**
- * This file creates draggable_components for the report-generator.
- * This is close to the list_options table, but this one if for the report generator module.
+ * This file creates report formats for the report-generator.
+ * These report formats are close to system static reports, but this one if for the report generator module.
  *
  * TODO Link this table to users table in order to keep track of user adding or editing a component.
- *
+ * @author Tigpezeghe Rodrige K. <tigrodrige@gmail.com>
  * Copyright 2018 Tigpezeghe Rodrige K. <tigrodrige@gmail.com>
  */
 use Illuminate\Support\Facades\Schema;
