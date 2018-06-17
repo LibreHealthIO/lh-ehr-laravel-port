@@ -102,10 +102,10 @@
                             <div class="card-body">
                                 <p class="note">Frequently used columns</p>
                                 <div class="row" id="draggable-column">
-                                    @foreach ($draggableComponents as $draggableComponent)
-                                        <div class="col-sm-2 wordwrap draggable" id="{{ $draggableComponent->option_id }}">
-                                            <p data-toggle="tooltip" data-placement="top" title="{{ $draggableComponent->title }}">
-                                                {{ $draggableComponent->title }}
+                                    @foreach ($draggable_components as $draggable_component)
+                                        <div class="col-sm-2 wordwrap draggable" id="{{ $draggable_component->option_id }}">
+                                            <p data-toggle="tooltip" data-placement="top" title="{{ $draggable_component->title }}">
+                                                {{ $draggable_component->title }}
                                             </p>
                                         </div>
                                     @endforeach

@@ -31,7 +31,7 @@ class CreateDraggableComponentsTable extends Migration
             $table->string('title', 255)->comment = "This is the text on the component that end users see.";
             $table->integer('order', 0)->comment = "The order in which components appear in the list.";
             $table->boolean('active')->default(1)->comment = "0 -> False, 1 -> True whether the component should be active or not.";
-            $table->string('notes', 1000)->comment = "This stores the fields that the component relates to in the database.";
+            $table->string('note', 255)->comment = "This stores the fields that the component relates to in the database.";
             $table->boolean('toggle_sort')->default(0)->comment = "0 -> False (Descending), 1 -> True (Ascending).";
             $table->boolean('toggle_display')->default(0)->comment = "0 -> False, 1 -> True. Display field if checked (1), and no if unchecked (0).";
 

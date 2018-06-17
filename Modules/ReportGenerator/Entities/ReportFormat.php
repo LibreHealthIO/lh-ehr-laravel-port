@@ -5,6 +5,8 @@
 |--------------------------------------------------------------------------
 |
 | This is the model for ReportFormat table.
+|
+| @author Tigpezeghe Rodrige K. <tigrodrige@gmail.com>
 | Copyright 2018 Tigpezeghe Rodrige K. <tigrodrige@gmail.com>
 |
 */
