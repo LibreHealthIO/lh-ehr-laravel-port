@@ -15,6 +15,6 @@
     @for($i = 0; $i < count($columns); $i++)
         <p>{{ $columns[$i] }}</p>
     @endfor
-    <hr/>
   @endforeach
+  {{ print_r($data) }}
 @endsection

@@ -16,6 +16,8 @@ namespace Modules\ReportGenerator\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+//use Illuminate\Database\Query\Builder as Builder;
 
 //use Modules\ReportGenerator\Entities\ReportFormat as ReportFormat;
 use Modules\ReportGenerator\Entities\DraggableComponent as DraggableComponent;
@@ -80,13 +82,46 @@ class ReportGeneratorController extends Controller
 
         $data = []; // store the retrieved data
         foreach ($column_list as $columns) { // $columns has the list of columns for each component.
-            for($i = 0; $i < count($columns); $i++) {
+            $num_of_columns = count($columns);
+            $table_name = $columns[0];
+            for($i = 0; $i < $num_of_columns; $i++) {
                 // Note: $column[0] always carries the table name
-                // SELECT $colum
+                // SELECT $column data
+                if($i==0) continue;
+                if($i== $num_of_columns-1) {
+                    $data = DB::connection('mysql_libreehr')
+                    ->table($table_name)
+                    ->select($columns[$i])
+                    ->union($data);
+
+                    $data = $data->union($data)->get();
+                    $data = collect($data);
+                     break;
+                }
+                if(empty($data)) {
+                    $data = DB::connection('mysql_libreehr')
+                        ->table($table_name)
+                        ->select($columns[1]);
+                }
+                $data = DB::connection('mysql_libreehr')
+                    ->table($table_name)
+                    ->select($columns[$i])
+                    ->union($data);
             }
         }
 
-        return view('reportgenerator::report')->with(['option_ids' => $option_ids, 'notes' => $notes, 'column_list' => $column_list]);
+        return view('reportgenerator::report')->with([
+            'option_ids' => $option_ids,
+            'notes' => $notes,
+            'column_list' => $column_list,
+            'data' => $data
+        ]);
+    }
+
+    private function query($table_name, $column)
+    {
+        $data = DB::table($table_name)->select($column);
+        return $data;
     }
 
     /**
