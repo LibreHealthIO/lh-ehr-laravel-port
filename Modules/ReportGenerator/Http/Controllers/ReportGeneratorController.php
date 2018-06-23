@@ -68,19 +68,20 @@ class ReportGeneratorController extends Controller
         $option_ids = unserialize($option_ids);
         $notes = []; // store the notes for each dragged component.
         $column_list = []; // store an array of lists of columns for each note in an array.
-        for ($i = 0; $i < count($option_ids); $i++) {
+        for ($i = 0; $i < count($option_ids); $i++) { // foreach $option_id
             $notes[$i] = DraggableComponent::where('option_id', $option_ids[$i])->first(); // get the notes for each component
-            $column_list[$i] = explode(':', $notes[$i]->note);
+            $column_list[$i] = explode(':', $notes[$i]->note); // split the each 'note string' and store in $column_list[]
         }
 
         $data = []; // store the retrieved data
         foreach ($column_list as $columns) { // $columns has the list of columns for each component.
             $table_name = $columns[0]; // get table name to which each column list points to.
             for($i = 1; $i < count($columns); $i++) {  // foreach list of columns
-                $data[] = DB::connection('mysql_libreehr') // get the data, and append to $data array
+                $data[] = DB::connection('mysql_libreehr') // get the data, and append to $data[]
                     ->table($table_name)
                     ->select($columns[$i])
-                    ->get();
+                    ->get()->toArray();
+                //$data = collect($data);
             }
         }
 
