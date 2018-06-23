@@ -17,7 +17,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-//use Illuminate\Database\Query\Builder as Builder;
 
 //use Modules\ReportGenerator\Entities\ReportFormat as ReportFormat;
 use Modules\ReportGenerator\Entities\DraggableComponent as DraggableComponent;
@@ -37,7 +36,9 @@ class ReportGeneratorController extends Controller
     /**
      * This function gets the selected components and sends them to them
      * to the showReport() function to get the data and show the report.
-     * @return Response
+     * @param Request $request : holds selected components
+     * @return Response $protocol_host : holds protocol and host
+     *                  $option_ids : holds option_ids of selected components
      */
     public function getComponents(Request $request)
     {
@@ -45,14 +46,13 @@ class ReportGeneratorController extends Controller
 
         // Get protocol and host to redirect users.
         $protocol_host = 'http://' . $_SERVER['HTTP_HOST'];
-        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')
             $protocol_host = 'https://' . $_SERVER['HTTP_HOST'];
-        }
 
         $option_ids = serialize($option_ids);
         return response()->json([
             'redirecturl' => $protocol_host.'/reportgenerator/report/'.$option_ids,
-            'success' => 'Received IDs',
+            'success' => 'Received Option IDs',
             'option_ids' => $option_ids
         ]);
     }
@@ -61,67 +61,30 @@ class ReportGeneratorController extends Controller
      * Use option_ids from getComponents() above,
      * get data and show the generated report.
      * @param Array $option_ids : selected draggable_components
-     * @return Response
-     *
-     * @TODO:
-     * 1. use ids to get the draggable components notes
-     * 2. use notes to get the table columns
-     * 3. Get the data from each column
-     * 4. send the data to the view
+     * @return Response $data : holds retrieved data
      */
     public function showReport($option_ids)
     {
         $option_ids = unserialize($option_ids);
-        $num_of_components = count($option_ids);
         $notes = []; // store the notes for each dragged component.
         $column_list = []; // store an array of lists of columns for each note in an array.
-        for ($i = 0; $i < $num_of_components; $i++) {
+        for ($i = 0; $i < count($option_ids); $i++) {
             $notes[$i] = DraggableComponent::where('option_id', $option_ids[$i])->first(); // get the notes for each component
             $column_list[$i] = explode(':', $notes[$i]->note);
         }
 
         $data = []; // store the retrieved data
         foreach ($column_list as $columns) { // $columns has the list of columns for each component.
-            $num_of_columns = count($columns);
-            $table_name = $columns[0];
-            for($i = 0; $i < $num_of_columns; $i++) {
-                // Note: $column[0] always carries the table name
-                // SELECT $column data
-                if($i==0) continue;
-                if($i== $num_of_columns-1) {
-                    $data = DB::connection('mysql_libreehr')
+            $table_name = $columns[0]; // get table name to which each column list points to.
+            for($i = 1; $i < count($columns); $i++) {  // foreach list of columns
+                $data[] = DB::connection('mysql_libreehr') // get the data, and append to $data array
                     ->table($table_name)
                     ->select($columns[$i])
-                    ->union($data);
-
-                    $data = $data->union($data)->get();
-                    $data = collect($data);
-                     break;
-                }
-                if(empty($data)) {
-                    $data = DB::connection('mysql_libreehr')
-                        ->table($table_name)
-                        ->select($columns[1]);
-                }
-                $data = DB::connection('mysql_libreehr')
-                    ->table($table_name)
-                    ->select($columns[$i])
-                    ->union($data);
+                    ->get();
             }
         }
 
-        return view('reportgenerator::report')->with([
-            'option_ids' => $option_ids,
-            'notes' => $notes,
-            'column_list' => $column_list,
-            'data' => $data
-        ]);
-    }
-
-    private function query($table_name, $column)
-    {
-        $data = DB::table($table_name)->select($column);
-        return $data;
+        return view('reportgenerator::report')->with('data', $data);
     }
 
     /**
