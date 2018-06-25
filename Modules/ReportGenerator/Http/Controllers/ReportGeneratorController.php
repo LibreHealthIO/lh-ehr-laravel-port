@@ -74,6 +74,7 @@ class ReportGeneratorController extends Controller
         }
 
         $data = []; // store the retrieved data
+        $column_names = []; // st
         foreach ($column_list as $columns) { // $columns has the list of columns for each component.
             $table_name = $columns[0]; // get table name to which each column list points to.
             for($i = 1; $i < count($columns); $i++) {  // foreach list of columns
@@ -82,10 +83,14 @@ class ReportGeneratorController extends Controller
                     ->select($columns[$i])
                     ->get()->toArray();
                 //$data = collect($data);
+                $column_names[] = $columns[$i];
             }
         }
 
-        return view('reportgenerator::report')->with('data', $data);
+        return view('reportgenerator::report')->with([
+                'data' => $data,
+                'column_names' => $column_names
+        ]);
     }
 
     /**
