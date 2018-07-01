@@ -26,7 +26,7 @@ class CreateDraggableComponentReportFormatTable extends Migration
             $table->increments('id')->comment = "Primary key.";
             $table->integer('draggable_component_id')->unsigned()->comment = "Used to access the draggable_components.";
             $table->foreign('draggable_component_id')->references('id')->on('draggable_components')->onDelete('cascade');
-            $table->integer('report_format_id')->unsigned()->comment = "Ussed to access the report_formats.";
+            $table->integer('report_format_id')->unsigned()->comment = "Used to access the report_formats.";
             $table->foreign('report_format_id')->references('id')->on('report_formats')->onDelete('cascade');
 
             $table->timestamps();

@@ -17,12 +17,16 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
 //use Modules\ReportGenerator\Entities\ReportFormat as ReportFormat;
+use Modules\ReportGenerator\Entities\SystemFeature as SystemFeature;
 use Modules\ReportGenerator\Entities\DraggableComponent as DraggableComponent;
 
 class ReportGeneratorController extends Controller
 {
+    use ValidatesRequests;
     /**
      * Display a listing of the resource.
      * @return Response
@@ -87,10 +91,40 @@ class ReportGeneratorController extends Controller
             }
         }
 
+        $system_features = SystemFeature::all();
+
         return view('reportgenerator::report')->with([
                 'data' => $data,
-                'column_names' => $column_names
+                'column_names' => $column_names,
+                'system_features' => $system_features
         ]);
+    }
+
+    /**
+     * Function for creating a new system feature.
+     * @return Response
+     */
+    public function createSystemFeature(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'feature_name' => 'required|max:255',
+            'description' => 'required|max:255'
+        ]);
+
+        if($validate->fails()){
+            return back()->withErrors($validate);
+        }
+
+        $system_feature = SystemFeature::create([
+            'name' => $request->feature_name,
+            'description' => $request->description,
+        ]);
+
+        if(!$system_feature){
+            return back()->with('failure', 'An error occured while saving system feature. Fill all fields!!!');
+        }
+
+        return back()->with('success', 'Successfully created new system feature '.$request->feature_name);
     }
 
     /**

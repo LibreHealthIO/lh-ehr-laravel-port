@@ -14,6 +14,7 @@
 namespace Modules\ReportGenerator\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\ReportGenerator\Entities\SystemFeature as SystemFeature;
 use Modules\ReportGenerator\Entities\DraggableComponent as DraggableComponent;
 
 class ReportFormat extends Model
@@ -44,6 +45,16 @@ class ReportFormat extends Model
     public function draggable_components()
     {
         return $this->belongsToMany('DraggableComponent')->withTimestamps();
+    }
+
+    /**
+    * The system feature that this report format belongs to.
+    *
+    * @return Response
+    */
+    public function system_feature()
+    {
+        return $this->belongsTo('SystemFeature')->withTimestamps();
     }
 
 }

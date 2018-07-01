@@ -3,6 +3,7 @@
 @section('title', 'Report Generator')
 
 @section('content')
+    &nbsp;
     <div class="container">
       <div class="alert alert-success" style="display:none"></div>
         <div class="row">
@@ -74,32 +75,4 @@
             <div class="col-sm-2"></div>
         </div>
     </div><!-- /.container -->
-    <!-- Add system feature modal-->
-    <div class="modal fade" id="add-system-feature" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle"><b>New System Feature</b></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="add-system-feature-form" action="index.html" method="post">
-                        <div class="form-group">
-                            <label for="feature-name">Feature name</label>
-                            <input type="text" name="feature-name" class="form-control" placeholder="Enter feature name">
-                        </div>
-                        <div class="form-group">
-                            <label for="feature-name">Short description</label>
-                            <textarea class="form-control" aria-label="Describe feature"></textarea>
-                        </div>
-                        <hr />
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" name="submit" class="btn btn-info">Save</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div><!-- /#add-system-feature -->
 @endsection
