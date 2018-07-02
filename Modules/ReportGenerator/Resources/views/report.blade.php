@@ -73,26 +73,29 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="add-system-feature-form" action="index.html" method="post">
+                <form class="add-system-feature-form" action="{{ url('reportgenerator/report_format') }}" method="post">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                     <div class="form-group">
                         <label for="feature_name">Select system feature</label>
-                        <select class="form-control" id="feature_name">
+                        <select class="form-control" name="system_feature_id" id="feature_name">
                             @foreach($system_features as $system_feature)
                                 <option value="{{ $system_feature->id }}">{{ $system_feature->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="report_name">Name of report</label>
-                        <input type="text" name="report_name" class="form-control" placeholder="Enter report name">
+                        <label for="title">Name of report</label>
+                        <input type="text" name="title" class="form-control" placeholder="Enter report name">
                     </div>
                     <div class="form-group">
                         <label for="description">Short description</label>
                         <textarea class="form-control" name="description" aria-label="Describe new report"></textarea>
                     </div>
+                    <input type="hidden" name="option_ids" value="{{ $option_ids }}" class="form-control">
                     <hr />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" name="submit" class="btn btn-info">Save</button>
+                    <button type="submit" name="submit" class="btn btn-info">Save</button>
                 </form>
             </div>
         </div>

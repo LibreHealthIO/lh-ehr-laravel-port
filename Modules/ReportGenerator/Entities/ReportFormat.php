@@ -19,7 +19,7 @@ use Modules\ReportGenerator\Entities\DraggableComponent as DraggableComponent;
 
 class ReportFormat extends Model
 {
-    protected $fillable = ['user', 'title', 'system_feature', 'description', 'draggable_components_id'];
+    protected $fillable = ['user', 'title', 'system_feature_id', 'description', 'draggable_components_id'];
 
     /**
      * Convert draggable_components_id column from jsona(as specified in migration file) to array.
@@ -44,7 +44,7 @@ class ReportFormat extends Model
     */
     public function draggable_components()
     {
-        return $this->belongsToMany('DraggableComponent')->withTimestamps();
+        return $this->belongsToMany('Modules\ReportGenerator\Entities\DraggableComponent')->withTimestamps();
     }
 
     /**

@@ -27,6 +27,7 @@ class CreateReportFormatsTable extends Migration
             $table->string('user', 255)->default('default')->comment = "The user who created the report format. This will be 'default' for components that come with the module.";
             $table->string('title', 255)->comment = "This is the report name e.g Patient List.";
             $table->text('description')->comment = "This describes the report format briefly.";
+            //$table->string('option_ids')->comment = "This stores the option ids of components that constitute this report format";
             $table->integer('system_feature_id')->unsigned()->comment = "The system feature under which the report belongs.";
             $table->foreign('system_feature_id')->references('id')->on('system_features')->onDelete('cascade');
             //$table->string('draggable_components_id', 1000)->comment = "This stores the id of all the components that belong to this report format";

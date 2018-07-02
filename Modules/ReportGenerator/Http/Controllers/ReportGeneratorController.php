@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
-//use Modules\ReportGenerator\Entities\ReportFormat as ReportFormat;
+use Modules\ReportGenerator\Entities\ReportFormat as ReportFormat;
 use Modules\ReportGenerator\Entities\SystemFeature as SystemFeature;
 use Modules\ReportGenerator\Entities\DraggableComponent as DraggableComponent;
 
@@ -96,7 +96,8 @@ class ReportGeneratorController extends Controller
         return view('reportgenerator::report')->with([
                 'data' => $data,
                 'column_names' => $column_names,
-                'system_features' => $system_features
+                'system_features' => $system_features,
+                'option_ids' => serialize($option_ids)
         ]);
     }
 
@@ -125,6 +126,48 @@ class ReportGeneratorController extends Controller
         }
 
         return back()->with('success', 'Successfully created new system feature '.$request->feature_name);
+    }
+
+    /**
+     * Function for creating a new report generator.
+     * @return Response
+     */
+    public function createReportFormat(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'title' => 'required|max:255',
+            'description' => 'required|max:255',
+            'system_feature_id' => 'required'
+        ]);
+
+        if($validate->fails()){
+            return back()->withErrors($validate);
+        }
+
+        // Save the report format
+        $report_format = ReportFormat::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'system_feature_id' => $request->system_feature_id
+        ]);
+
+        // Save the draggable components in the join table (Report format and draggable_components table)
+        $new_report_format = ReportFormat::findOrFail($report_format->id); // Get the last inserted report format id
+        $draggable_component_ids = []; // Store the ids of the draggable components
+        $option_ids = unserialize($request->option_ids);
+
+        foreach ($option_ids as $key => $option_id) { // foreach option id,
+            $draggable_component_ids[] = DraggableComponent::where('option_id', $option_id)->first()->id; // get the id of the corresponding draggable component
+        }
+
+        // Populate the draggable_component_report_format join table
+        $new_report_format->draggable_components()->attach($draggable_component_ids);
+
+        if(!$report_format){
+            return back()->with('failure', 'An error occured while saving report format. Fill all fields!!!');
+        }
+
+        return back()->with('success', 'Successfully created new report format '.$request->title);
     }
 
     /**
