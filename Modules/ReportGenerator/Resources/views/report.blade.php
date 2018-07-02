@@ -7,13 +7,13 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-warning" style="background-color:#ccc !important">
     <!-- The button below opens the add system feature modal below. -->
     <h5 style="margin-right: 50px !important"><strong>Generated Report</strong></h5>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedButtons" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarSupportedButtons">
         <ul class="navbar-nav mr-auto" style="margin-left: 500px !important">
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add-report-format">Save report as</button>&nbsp;
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add-system-feature">Print</button>&nbsp;
+            <button type="button" class="btn btn-info" onclick="printReport('report_div')">Print</button>&nbsp;
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add-system-feature">PDF</button>&nbsp;
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add-system-feature">TXT</button>&nbsp;
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add-system-feature">CSV</button>&nbsp;
@@ -22,12 +22,13 @@
     </div>
 </nav><!-- /.navbar -->
 <br />
-<table style="table-layout: fixed;" border="1" width="{{ count($data) < 5 ? '100%' : '' }}">
+<div id="report_div" style="overflow-x: auto">
+<table width="100%" border="1">
     <tr>
         @foreach($data as $index => $datum)
             <td>
                 <table class="table table-sm">
-                    <thead style="background-color:#ccc !important">
+                    <thead>
                         <tr>
                             @if($index == 0)
                                 <th scope="col">#</th>
@@ -61,7 +62,7 @@
         @endforeach
     </tr>
 </table>
-
+</div>
 <!-- Add report format modal-->
 <div class="modal fade" id="add-report-format" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -94,7 +95,7 @@
                     </div>
                     <input type="hidden" name="option_ids" value="{{ $option_ids }}" class="form-control">
                     <hr />
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     <button type="submit" name="submit" class="btn btn-info">Save</button>
                 </form>
             </div>

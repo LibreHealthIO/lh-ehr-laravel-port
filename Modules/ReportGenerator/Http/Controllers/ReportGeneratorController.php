@@ -91,7 +91,7 @@ class ReportGeneratorController extends Controller
             }
         }
 
-        $system_features = SystemFeature::all();
+        $system_features = SystemFeature::all(); // These are used in the select field in the form to add new report format
 
         return view('reportgenerator::report')->with([
                 'data' => $data,
@@ -107,21 +107,21 @@ class ReportGeneratorController extends Controller
      */
     public function createSystemFeature(Request $request)
     {
-        $validate = Validator::make($request->all(), [
+        $validate = Validator::make($request->all(), [ // Validate the input from new system feature form
             'feature_name' => 'required|max:255',
             'description' => 'required|max:255'
         ]);
 
-        if($validate->fails()){
+        if($validate->fails()){ // Fire error if validation fails
             return back()->withErrors($validate);
         }
 
-        $system_feature = SystemFeature::create([
+        $system_feature = SystemFeature::create([ // Save new system feature
             'name' => $request->feature_name,
             'description' => $request->description,
         ]);
 
-        if(!$system_feature){
+        if(!$system_feature){ // If for some reason system feature isn't created, fire error message
             return back()->with('failure', 'An error occured while saving system feature. Fill all fields!!!');
         }
 
@@ -134,13 +134,13 @@ class ReportGeneratorController extends Controller
      */
     public function createReportFormat(Request $request)
     {
-        $validate = Validator::make($request->all(), [
+        $validate = Validator::make($request->all(), [ // Validate the input from new report format form
             'title' => 'required|max:255',
             'description' => 'required|max:255',
             'system_feature_id' => 'required'
         ]);
 
-        if($validate->fails()){
+        if($validate->fails()){ // Fire error if validation fails
             return back()->withErrors($validate);
         }
 
@@ -163,7 +163,7 @@ class ReportGeneratorController extends Controller
         // Populate the draggable_component_report_format join table
         $new_report_format->draggable_components()->attach($draggable_component_ids);
 
-        if(!$report_format){
+        if(!$report_format){ // If for some reason report format isn't created, fire error message
             return back()->with('failure', 'An error occured while saving report format. Fill all fields!!!');
         }
 

@@ -145,7 +145,7 @@
                                 <textarea class="form-control" name="description" id="description" aria-label="Describe feature"></textarea>
                             </div>
                             <hr />
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                             <button type="submit" name="submit" class="btn btn-info">Save</button>
                         </form>
                     </div>
@@ -153,13 +153,5 @@
             </div>
         </div><!-- /#add-system-feature -->
         <script src="{{ URL::asset('assets/js/master.js') }}"></script>
-        <script type="text/javascript">
-            $(document).ready(function(){
-                // Hide alert messsage after 30 seconds
-                setTimeout(function(){
-                    $("#alert").hide();
-                }, 30000);
-            });
-        </script>
     </body>
 </html>

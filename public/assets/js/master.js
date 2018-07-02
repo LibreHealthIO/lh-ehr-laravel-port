@@ -66,6 +66,34 @@ function generate(IDs) {
   });
 }
 
+/* This function prints the report.
+ * @params: DOM element: report_div
+ * @return: Boolean: True
+ */
+function printReport(report_div) {
+    var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+    mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+    mywindow.document.write('</head><body >');
+    mywindow.document.write('<h1>' + document.title  + '</h1>');
+    mywindow.document.write(document.getElementById(report_div).innerHTML);
+    mywindow.document.write('</body></html>');
+
+    //mywindow.document.write('<script type="text/javascript">$(window).load(function() { window.print(); window.close(); });</script>');
+
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/
+
+    setTimeout(function() { // This is for large documents
+        mywindow.close();
+    }, 10);
+
+    mywindow.print();
+    mywindow.close();
+
+    return true;
+}
+
 $(document).ready(function() {
   $('#generate-button').click(function(e) {
     e.preventDefault();
@@ -75,4 +103,9 @@ $(document).ready(function() {
       generate(IDs); // Call the generate function above when the generate button is clicked
     }
   });
+
+  // Hide alert messsage after 30 seconds
+  setTimeout(function(){
+      $("#alert").hide();
+  }, 10000);
 });

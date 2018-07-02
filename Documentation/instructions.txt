@@ -50,9 +50,15 @@ Instructions:
     DB_USERNAME = your_username
     DB_PASSWORD = your_password
 
+    // For Report Generator's database
     DB_REPORT_GENERATOR_DATABASE=homestead
     DB_REPORT_GENERATOR_USERNAME=homestead
     DB_REPORT_GENERATOR_PASSWORD=secret
+
+    // For Main LibreEHR database
+    DB_LIBREEHR_DATABASE=homestead
+    DB_LIBREEHR_USERNAME=homestead
+    DB_LIBREEHR_PASSWORD=secret
 
 10. Now, you can create the database by running
     'php artisan make:database' // Subsequently, this will create both databases automatically.
