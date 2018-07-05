@@ -33,8 +33,14 @@ class ReportGeneratorController extends Controller
      */
     public function index()
     {
+        $report_formats = ReportFormat::all();
+        $system_features = SystemFeature::all();
         $draggable_components = DraggableComponent::all();
-        return view('reportgenerator::index')->with('draggable_components', $draggable_components);
+        return view('reportgenerator::index')->with([
+            'report_formats' => $report_formats,
+            'system_features' => $system_features,
+            'draggable_components' => $draggable_components
+        ]);
     }
 
     /**
@@ -90,13 +96,13 @@ class ReportGeneratorController extends Controller
                 $column_names[] = $columns[$i];
             }
         }
-
-        $system_features = SystemFeature::all(); // These are used in the select field in the form to add new report format
+ // These are used in menu and the select field in the form to add new report format
 
         return view('reportgenerator::report')->with([
                 'data' => $data,
                 'column_names' => $column_names,
                 'system_features' => $system_features,
+                'report_formats' => $report_formats,
                 'option_ids' => serialize($option_ids)
         ]);
     }

@@ -1,14 +1,16 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
---
--- Use this file to seed the Report generator for now.
+
 --
 -- Database: `librereportgenerator`
 --
+
 -- --------------------------------------------------------
+
 --
 -- Dumping data for table `draggable_components`
 --
+
 INSERT INTO `draggable_components` (`id`, `option_id`, `is_default`, `user`, `title`, `order`, `active`, `note`, `toggle_sort`, `toggle_display`, `created_at`, `updated_at`) VALUES
 (1, 'pfullname', 1, 'default', 'Patient Fullname', 5, 1, 'patient_data:fname:mname:lname', 0, 0, NULL, NULL),
 (2, 'plfname', 1, 'default', 'Patient Last Firstname', 10, 1, 'patient_data:lname:fname', 0, 0, NULL, NULL),
@@ -44,5 +46,49 @@ INSERT INTO `draggable_components` (`id`, `option_id`, `is_default`, `user`, `ti
 -- --------------------------------------------------------
 
 --
+-- Dumping data for table `draggable_component_report_format`
+--
+
+INSERT INTO `draggable_component_report_format` (`id`, `draggable_component_id`, `report_format_id`, `created_at`, `updated_at`) VALUES
+(1, 21, 1, '2018-07-05 09:16:37', '2018-07-05 09:16:37'),
+(2, 12, 1, '2018-07-05 09:16:37', '2018-07-05 09:16:37'),
+(3, 19, 1, '2018-07-05 09:16:37', '2018-07-05 09:16:37'),
+(4, 5, 2, '2018-07-05 09:21:59', '2018-07-05 09:21:59'),
+(5, 20, 2, '2018-07-05 09:21:59', '2018-07-05 09:21:59'),
+(6, 12, 2, '2018-07-05 09:21:59', '2018-07-05 09:21:59'),
+(7, 21, 3, '2018-07-05 09:36:19', '2018-07-05 09:36:19'),
+(8, 30, 3, '2018-07-05 09:36:19', '2018-07-05 09:36:19'),
+(9, 21, 4, '2018-07-05 09:37:39', '2018-07-05 09:37:39'),
+(10, 25, 4, '2018-07-05 09:37:39', '2018-07-05 09:37:39'),
+(11, 18, 4, '2018-07-05 09:37:39', '2018-07-05 09:37:39'),
+(12, 21, 5, '2018-07-05 09:40:59', '2018-07-05 09:40:59'),
+(13, 23, 5, '2018-07-05 09:40:59', '2018-07-05 09:40:59'),
+(14, 13, 5, '2018-07-05 09:40:59', '2018-07-05 09:40:59'),
+(15, 15, 5, '2018-07-05 09:40:59', '2018-07-05 09:40:59');
+
+-- --------------------------------------------------------
+
+--
 -- Dumping data for table `report_formats`
 --
+
+INSERT INTO `report_formats` (`id`, `user`, `title`, `description`, `system_feature_id`, `created_at`, `updated_at`) VALUES
+(1, 'default', 'Patient List', 'List of all patients with basic demographics.', 1, '2018-07-05 09:16:37', '2018-07-05 09:16:37'),
+(2, 'default', 'Patients Contacts and Address', 'List of all patient\'s email, phone, street, city and state.', 1, '2018-07-05 09:21:59', '2018-07-05 09:21:59'),
+(3, 'default', 'Patient Family Size', 'Information on patient\'s family size', 1, '2018-07-05 09:36:19', '2018-07-05 09:36:19'),
+(4, 'default', 'Patient Registration', 'Information on patient\'s registrars, and date.', 1, '2018-07-05 09:37:39', '2018-07-05 09:37:39'),
+(5, 'default', 'Patient SS', 'Patients\' SS and postal codes', 1, '2018-07-05 09:40:59', '2018-07-05 09:40:59');
+
+-- --------------------------------------------------------
+
+--
+-- Dumping data for table `system_features`
+--
+
+INSERT INTO `system_features` (`id`, `name`, `description`, `user`, `created_at`, `updated_at`) VALUES
+(1, 'Clients', 'Reports related to clients', 'default', '2018-07-02 04:43:04', '2018-07-02 04:43:04'),
+(2, 'Financial', 'Reports related to finance and payments.', 'default', '2018-07-02 08:20:40', '2018-07-02 08:20:40'),
+(3, 'Visits', 'Reports concerning patients and other visits.', 'default', '2018-07-04 23:00:00', '2018-07-04 23:00:00'),
+(4, 'Procedures', 'Procedure statistics, and other pending orders', 'default', '2018-07-04 23:00:00', '2018-07-04 23:00:00'),
+(5, 'Insurance', 'Reports related to patients\' insurance, and other related issues.', 'default', '2018-07-04 23:00:00', '2018-07-04 23:00:00'),
+(6, 'Inventory', 'Reports related to inventory at various level in the system.', 'default', '2018-07-04 23:00:00', '2018-07-04 23:00:00');

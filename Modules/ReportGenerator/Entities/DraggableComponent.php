@@ -14,7 +14,6 @@
 namespace Modules\ReportGenerator\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use Modules\ReportGenerator\Entities\ReportFormat as ReportFormat;
 
 class DraggableComponent extends Model
 {
@@ -43,6 +42,6 @@ class DraggableComponent extends Model
     */
     public function report_formats()
     {
-        return $this->belongsToMany('ReportFormat')->withTimestamps();
+        return $this->belongsToMany('Modules\ReportGenerator\Entities\ReportFormat');
     }
 }

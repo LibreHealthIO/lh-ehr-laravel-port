@@ -26,6 +26,7 @@ class CreateSystemFeaturesTable extends Migration
             $table->increments('id')->comment = "This will identify each system feature with a unique integer.";
             $table->string('name')->comment = "The name of the system feature.";
             $table->text('description')->comment = "This describes the system feature briefly.";
+            $table->string('user', 255)->default('default')->comment = "The user who created the feature. This will be 'default' for features that come with the module.";
 
             $table->timestamps();
         });

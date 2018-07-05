@@ -14,7 +14,6 @@
 namespace Modules\ReportGenerator\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use Modules\ReportGenerator\Entities\ReportFormat as ReportFormat;
 
 class SystemFeature extends Model
 {
@@ -41,7 +40,7 @@ class SystemFeature extends Model
     */
     public function report_formats()
     {
-        return $this->hasMany('ReportFormat')->withTimestamps();
+        return $this->hasMany('Modules\ReportGenerator\Entities\ReportFormat');
     }
 
 }
