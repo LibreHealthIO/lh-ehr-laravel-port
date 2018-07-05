@@ -129,7 +129,7 @@ class ReportGeneratorController extends Controller
     }
 
     /**
-     * Function for creating a new report generator.
+     * Function for creating a new report format.
      * @return Response
      */
     public function createReportFormat(Request $request)
