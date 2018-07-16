@@ -37,6 +37,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
+                    <a class="nav-link" href="{{ url('/reportgenerator') }}" role="button" aria-haspopup="true" aria-expanded="false"><strong>Home</strong></a>
                     @foreach($system_features as $system_feature)
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $system_feature->name }}</a>
@@ -47,6 +48,7 @@
                             </div>
                         </li>
                     @endforeach
+                    <a class="nav-link" href="{{ url('reportgenerator/system_feature') }}" role="button" aria-haspopup="true" aria-expanded="false"><strong>System features</strong></a>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                   <input class="form-control mr-sm-2" type="search" placeholder="Search system features" aria-label="Search">
@@ -109,6 +111,67 @@
                 </div>
             </div>
         </div><!-- /#add-system-feature -->
+
+        <!-- Edit system feature modal-->
+        <div class="modal fade" id="edit-system-feature" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"><b>Edit System Feature</b></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="edit-system-feature-form" action="" id="edit-system-feature-form" method="post">
+                            {{ csrf_field() }}
+                            {{ method_field('PATCH') }}
+                            <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                            <div class="form-group"><input type="hidden" name="id" id="id"></div>
+                            <div class="form-group">
+                                <label for="feature_name">Feature name</label>
+                                <input type="text" name="feature_name" class="form-control" id="feature_name" placeholder="Enter feature name">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Short description</label>
+                                <textarea class="form-control" name="description" id="description" aria-label="Describe feature"></textarea>
+                            </div>
+                            <hr />
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            <button type="submit" name="submit" class="btn btn-info">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /#edit-system-feature -->
+
+        <!-- Delete system feature modal-->
+        <div class="modal fade" id="delete-system-feature" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"><b>Delete System Feature</b></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="delete-system-feature-form" action="" id="delete-system-feature-form" method="post">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                            <div class="form-group"><input type="hidden" name="id" id="id"></div>
+                            <div class="form-group">
+                                <p>Are you sure you want to delete <strong><span id="feature_name"></span> ?</strong></p>
+                            </div>
+                            <hr />
+                            <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                            <button type="submit" name="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /#delete-system-feature -->
         <script src="{{ URL::asset('assets/js/master.js') }}"></script>
     </body>
 </html>

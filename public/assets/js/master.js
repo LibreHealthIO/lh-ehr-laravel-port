@@ -95,17 +95,37 @@ function printReport(report_div) {
 }
 
 $(document).ready(function() {
-  $('#generate-button').click(function(e) {
-    e.preventDefault();
-    if (jQuery.isEmptyObject(IDs)) { // check if the user has dropped any component before trying to generate a report
-      alert("Cannot generate a blank report! You must add at least one component.");
-    } else {
-      generate(IDs); // Call the generate function above when the generate button is clicked
-    }
-  });
+    /*** generate report from dropped components ***/
+    $('#generate-button').click(function(e) {
+        e.preventDefault();
+        if (jQuery.isEmptyObject(IDs)) { // check if the user has dropped any component before trying to generate a report
+            alert("Cannot generate a blank report! You must add at least one component.");
+        } else {
+            generate(IDs); // Call the generate function above when the generate button is clicked
+        }
+    });
 
-  // Hide alert messsage after 30 seconds
-  setTimeout(function(){
-      $("#alert").hide();
-  }, 10000);
+    /*** Edit system feature ***/
+    $('#edit-system-feature').on('show.bs.modal', function(e){
+        $('#edit-system-feature #feature_name').val($(e.relatedTarget).data('feature_name'));
+        $('#edit-system-feature #description').val($(e.relatedTarget).data('description'));
+        $('#edit-system-feature-form').submit(function(){
+            var id = $('#edit-system-feature #id').val($(e.relatedTarget).data('id'));
+            $("#edit-system-feature-form").attr("action", "system_feature/" + id);
+        });
+    });
+
+    /*** Delete system feature ***/
+    $('#delete-system-feature').on('show.bs.modal', function(e){
+        $('#delete-system-feature #feature_name').text($(e.relatedTarget).data('feature_name'));
+        $('#delete-system-feature-form').submit(function(){
+            var id = $('#delete-system-feature #id').val($(e.relatedTarget).data('id'));
+            $("#delete-system-feature-form").attr("action", "system_feature/" + id);
+        });
+    });
+
+    /*** Hide alert messsage after 30 seconds ***/
+    setTimeout(function(){
+        $("#alert").hide();
+    }, 10000);
 });

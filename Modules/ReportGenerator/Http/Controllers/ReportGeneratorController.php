@@ -27,6 +27,7 @@ use Modules\ReportGenerator\Entities\DraggableComponent as DraggableComponent;
 class ReportGeneratorController extends Controller
 {
     use ValidatesRequests;
+    
     /**
      * Display a listing of the resource.
      * @return Response
@@ -96,7 +97,10 @@ class ReportGeneratorController extends Controller
                 $column_names[] = $columns[$i];
             }
         }
- // These are used in menu and the select field in the form to add new report format
+
+        // These are used in menu and the select field in the form to add new report format
+        $system_features = SystemFeature::all();
+        $report_formats = ReportFormat::all();
 
         return view('reportgenerator::report')->with([
                 'data' => $data,
@@ -105,75 +109,6 @@ class ReportGeneratorController extends Controller
                 'report_formats' => $report_formats,
                 'option_ids' => serialize($option_ids)
         ]);
-    }
-
-    /**
-     * Function for creating a new system feature.
-     * @return Response
-     */
-    public function createSystemFeature(Request $request)
-    {
-        $validate = Validator::make($request->all(), [ // Validate the input from new system feature form
-            'feature_name' => 'required|max:255',
-            'description' => 'required|max:255'
-        ]);
-
-        if($validate->fails()){ // Fire error if validation fails
-            return back()->withErrors($validate);
-        }
-
-        $system_feature = SystemFeature::create([ // Save new system feature
-            'name' => $request->feature_name,
-            'description' => $request->description,
-        ]);
-
-        if(!$system_feature){ // If for some reason system feature isn't created, fire error message
-            return back()->with('failure', 'An error occured while saving system feature. Fill all fields!!!');
-        }
-
-        return back()->with('success', 'Successfully created new system feature '.$request->feature_name);
-    }
-
-    /**
-     * Function for creating a new report format.
-     * @return Response
-     */
-    public function createReportFormat(Request $request)
-    {
-        $validate = Validator::make($request->all(), [ // Validate the input from new report format form
-            'title' => 'required|max:255',
-            'description' => 'required|max:255',
-            'system_feature_id' => 'required'
-        ]);
-
-        if($validate->fails()){ // Fire error if validation fails
-            return back()->withErrors($validate);
-        }
-
-        // Save the report format
-        $report_format = ReportFormat::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'system_feature_id' => $request->system_feature_id
-        ]);
-
-        // Save the draggable components in the join table (Report format and draggable_components table)
-        $new_report_format = ReportFormat::findOrFail($report_format->id); // Get the last inserted report format id
-        $draggable_component_ids = []; // Store the ids of the draggable components
-        $option_ids = unserialize($request->option_ids);
-
-        foreach ($option_ids as $key => $option_id) { // foreach option id,
-            $draggable_component_ids[] = DraggableComponent::where('option_id', $option_id)->first()->id; // get the id of the corresponding draggable component
-        }
-
-        // Populate the draggable_component_report_format join table
-        $new_report_format->draggable_components()->attach($draggable_component_ids);
-
-        if(!$report_format){ // If for some reason report format isn't created, fire error message
-            return back()->with('failure', 'An error occured while saving report format. Fill all fields!!!');
-        }
-
-        return back()->with('success', 'Successfully created new report format '.$request->title);
     }
 
     /**

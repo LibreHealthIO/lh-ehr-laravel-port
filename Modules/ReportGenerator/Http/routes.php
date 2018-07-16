@@ -8,11 +8,27 @@ Route::group(['middleware' => 'web', 'prefix' => 'reportgenerator', 'namespace' 
 
     Route::get('/report/{option_ids}', 'ReportGeneratorController@showReport');
 
-    Route::get('/system_feature', 'ReportGeneratorController@showSystemFeatures'); // show all system features
+    /*** System Feature routes ***/
+    Route::resource('system_feature', 'SystemFeatureController');
+    /*
+    Route::get('/system_feature', 'SystemFeatureController@index'); // show all system features
 
-    Route::post('/system_feature', 'ReportGeneratorController@createSystemFeature'); // create new system feature
+    Route::post('/system_feature', 'SystemFeatureController@store'); // create new system feature
 
-    Route::get('/report_format', 'ReportGeneratorController@showReportFormats'); // show all report formats
+    Route::patch('/system_feature/{id}/{feature_name}/{description}', 'SystemFeatureController@update'); // update system feature
 
-    Route::post('/report_format', 'ReportGeneratorController@createReportFormat'); // create new report format
+    Route::delete('/system_feature/{id}', 'SystemFeatureController@destroy'); // delete system feature
+    */
+
+    /*** System Feature routes ***/
+    Route::resource('report_format', 'ReportFormatController');
+    /*
+    Route::get('/report_format', 'ReportFormatController@index'); // show all report formats
+
+    Route::post('/report_format', 'ReportFormatController@store'); // create new report format
+
+    Route::put('/report_format/{id}', 'ReportFormatController@update'); // update report format
+
+    Route::delete('/report_format/{id}', 'ReportFormatController@destroy'); // delete report format
+    */
 });
