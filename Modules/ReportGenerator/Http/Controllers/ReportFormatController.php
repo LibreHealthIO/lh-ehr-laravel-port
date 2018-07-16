@@ -27,12 +27,15 @@ use Modules\ReportGenerator\Entities\DraggableComponent as DraggableComponent;
 class ReportFormatController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource, report formats.
      * @return Response
      */
     public function index()
     {
-        return view('reportgenerator::index');
+        return view('reportgenerator::report_formats')->with([
+            'report_formats' => ReportFormat::all(),
+            'system_features' => SystemFeature::all(),
+        ]);
     }
 
     /**
@@ -116,9 +119,20 @@ class ReportFormatController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     *
      * @return Response
      */
-    public function destroy()
+    public function destroy(Request $request)
     {
+        $report_format = ReportFormat::find($request->id);
+        $report_format->delete();
+
+        if(!$report_format){ // If for some reason system feature isn't created, fire error message
+            return back()->with('failure', 'An error occured while deleting report format. Try again!!!');
+        }
+
+        return back()->with('success', 'Deleted report format, '.$report_format->title);
     }
 }

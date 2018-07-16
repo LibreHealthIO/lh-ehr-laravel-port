@@ -26,19 +26,13 @@ use Modules\ReportGenerator\Entities\DraggableComponent as DraggableComponent;
 
 class SystemFeatureController extends Controller
 {
-    /*** Return all system features ***/
-    protected function allSystemFeatures()
-    {
-        return SystemFeature::all();
-    }
-
     /**
-     * Function for creating a new system feature.
+     * Show all system features.
      * @return Response
      */
      public function index()
      {
-         return view('reportgenerator::system_features')->with('system_features', $this->allSystemFeatures());
+         return view('reportgenerator::system_features')->with('system_features', SystemFeature::all());
      }
 
     /**
@@ -140,7 +134,7 @@ class SystemFeatureController extends Controller
         $system_feature->delete();
 
         if(!$system_feature){ // If for some reason system feature isn't created, fire error message
-            return back()->with('failure', 'An error occured while deleting system feature. Fill all fields!!!');
+            return back()->with('failure', 'An error occured while deleting system feature. Try again!!!');
         }
 
         return back()->with('success', 'Deleted system feature, '.$system_feature->name);

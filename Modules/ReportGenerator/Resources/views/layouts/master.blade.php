@@ -172,6 +172,34 @@
                 </div>
             </div>
         </div><!-- /#delete-system-feature -->
+
+        <!-- Delete report format modal-->
+        <div class="modal fade" id="delete-report-format" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"><b>Delete Report Format</b></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="delete-report-format-form" action="" id="delete-report-format-form" method="post">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                            <div class="form-group"><input type="hidden" name="id" id="id"></div>
+                            <div class="form-group">
+                                <p>Are you sure you want to delete <strong><span id="title"></span> ?</strong></p>
+                            </div>
+                            <hr />
+                            <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                            <button type="submit" name="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /#delete-report-format -->
         <script src="{{ URL::asset('assets/js/master.js') }}"></script>
     </body>
 </html>

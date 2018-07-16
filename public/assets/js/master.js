@@ -124,6 +124,15 @@ $(document).ready(function() {
         });
     });
 
+    /*** Delete report format ***/
+    $('#delete-report-format').on('show.bs.modal', function(e){
+        $('#delete-report-format #title').text($(e.relatedTarget).data('title'));
+        $('#delete-report-format-form').submit(function(){
+            var id = $('#delete-report-format #id').val($(e.relatedTarget).data('id'));
+            $("#delete-report-format-form").attr("action", "report_format/" + id);
+        });
+    });
+
     /*** Hide alert messsage after 30 seconds ***/
     setTimeout(function(){
         $("#alert").hide();

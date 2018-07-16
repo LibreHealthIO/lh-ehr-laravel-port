@@ -20,7 +20,7 @@ Route::group(['middleware' => 'web', 'prefix' => 'reportgenerator', 'namespace' 
     Route::delete('/system_feature/{id}', 'SystemFeatureController@destroy'); // delete system feature
     */
 
-    /*** System Feature routes ***/
+    /*** Report Format routes ***/
     Route::resource('report_format', 'ReportFormatController');
     /*
     Route::get('/report_format', 'ReportFormatController@index'); // show all report formats
