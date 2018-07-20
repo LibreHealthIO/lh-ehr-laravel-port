@@ -20,7 +20,7 @@
                   <td>{{ $report_format->title }}</td>
                   <td>{{ $report_format->description }}</td>
                   <td>
-                      <a class="btn btn-success btn-sm" href="#" role="button" data-toggle="modal" data-target="#view-report-format" data-id="{{ $report_format->id }}" data-title="{{ $report_format->title }}" data-description="{{ $report_format->description }}"> View</a>
+                      <a class="btn btn-success btn-sm" href="{{ url('/reportgenerator/report_format/view/'.$report_format->id) }}" role="button"> View</a>
                       <a class="btn btn-primary btn-sm" href="#" role="button" data-toggle="modal" data-target="#edit-report-format" data-id="{{ $report_format->id }}" data-title="{{ $report_format->title }}" data-description="{{ $report_format->description }}"> Edit</a>
                       <a class="btn btn-danger btn-sm" href="#" role="button" data-toggle="modal" data-target="#delete-report-format" data-id="{{ $report_format->id }}" data-title="{{ $report_format->title }}"> Delete</a>
                   </td>

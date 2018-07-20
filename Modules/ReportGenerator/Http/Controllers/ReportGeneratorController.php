@@ -112,6 +112,26 @@ class ReportGeneratorController extends Controller
     }
 
     /**
+     * Get option_ids for report from selected report_format
+     * @param: Request $report_format_id
+     * @return: showReport($option_ids)
+     */
+     public function view($report_format_id)
+     {
+         $draggable_components = ReportFormat::find($report_format_id)->draggable_components()->get();
+
+         $option_ids = [];
+         foreach ($draggable_components as $draggable_component) {
+             $option_ids[] = $draggable_component->option_id;
+         }
+
+         $option_ids = serialize($option_ids);
+
+         return ReportGeneratorController::showReport($option_ids); // call showReport method above
+
+     }
+
+    /**
      * Show the form for creating a new resource.
      * @return Response
      */

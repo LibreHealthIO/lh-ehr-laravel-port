@@ -42,7 +42,7 @@ class ReportFormat extends Model
     */
     public function draggable_components()
     {
-        return $this->belongsToMany('Modules\ReportGenerator\Entities\DraggableComponent');
+        return $this->belongsToMany('Modules\ReportGenerator\Entities\DraggableComponent')->withTimestamps();
     }
 
     /**

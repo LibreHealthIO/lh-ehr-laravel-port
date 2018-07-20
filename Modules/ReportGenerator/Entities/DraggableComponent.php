@@ -42,6 +42,6 @@ class DraggableComponent extends Model
     */
     public function report_formats()
     {
-        return $this->belongsToMany('Modules\ReportGenerator\Entities\ReportFormat');
+        return $this->belongsToMany('Modules\ReportGenerator\Entities\ReportFormat')->withTimestamps();
     }
 }
