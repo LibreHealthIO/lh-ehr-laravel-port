@@ -94,8 +94,12 @@ class SystemFeatureController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
      * @param  Request $request
+     *
      * @return Response
+     *
+     * TODO: Restrict users from deleting default system features.
      */
     public function update(Request $request)
     {
@@ -127,6 +131,8 @@ class SystemFeatureController extends Controller
      * @param  int  $id
      *
      * @return Response
+     *
+     * TODO: Restrict users from deleting default system features.
      */
     public function destroy(Request $request)
     {
@@ -139,4 +145,5 @@ class SystemFeatureController extends Controller
 
         return back()->with('success', 'Deleted system feature, '.$system_feature->name);
     }
+
 }

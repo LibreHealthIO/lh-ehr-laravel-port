@@ -124,6 +124,16 @@ $(document).ready(function() {
         });
     });
 
+    /*** Edit report format ***/
+    $('#edit-report-format').on('show.bs.modal', function(e){
+        $('#edit-report-format #title').val($(e.relatedTarget).data('title'));
+        $('#edit-report-format #description').val($(e.relatedTarget).data('description'));
+        $('#edit-report-format-form').submit(function(){
+            var id = $('#edit-report-format #id').val($(e.relatedTarget).data('id'));
+            $("#edit-report-format-form").attr("action", "report_format/" + id);
+        });
+    });
+
     /*** Delete report format ***/
     $('#delete-report-format').on('show.bs.modal', function(e){
         $('#delete-report-format #title').text($(e.relatedTarget).data('title'));

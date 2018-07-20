@@ -27,7 +27,7 @@ use Modules\ReportGenerator\Entities\DraggableComponent as DraggableComponent;
 class ReportGeneratorController extends Controller
 {
     use ValidatesRequests;
-    
+
     /**
      * Display a listing of the resource.
      * @return Response

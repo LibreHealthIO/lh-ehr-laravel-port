@@ -49,6 +49,8 @@
                         </li>
                     @endforeach
                     <a class="nav-link" href="{{ url('reportgenerator/system_feature') }}" role="button" aria-haspopup="true" aria-expanded="false"><strong>System features</strong></a>
+
+                    <a class="nav-link" href="{{ url('reportgenerator/report_format') }}" role="button" aria-haspopup="true" aria-expanded="false"><strong>Report formats</strong></a>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                   <input class="form-control mr-sm-2" type="search" placeholder="Search system features" aria-label="Search">
@@ -172,6 +174,39 @@
                 </div>
             </div>
         </div><!-- /#delete-system-feature -->
+
+        <!-- Edit report format modal-->
+        <div class="modal fade" id="edit-report-format" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"><b>Edit Report Format</b></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="edit-report-format-form" action="" id="edit-report-format-form" method="post">
+                            {{ csrf_field() }}
+                            {{ method_field('PATCH') }}
+                            <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                            <div class="form-group"><input type="hidden" name="id" id="id"></div>
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" name="title" class="form-control" id="title" placeholder="Enter title">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Short description</label>
+                                <textarea class="form-control" name="description" id="description" aria-label="Describe feature"></textarea>
+                            </div>
+                            <hr />
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            <button type="submit" name="submit" class="btn btn-info">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /#edit-system-feature -->
 
         <!-- Delete report format modal-->
         <div class="modal fade" id="delete-report-format" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

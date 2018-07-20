@@ -49,7 +49,9 @@ class ReportFormatController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
      * @param  Request $request
+     *
      * @return Response
      */
     public function store(Request $request)
@@ -110,11 +112,35 @@ class ReportFormatController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
      * @param  Request $request
+     *
      * @return Response
+     *
+     * TODO: Restrict users from deleting default report formats.
      */
     public function update(Request $request)
     {
+        $validate = Validator::make($request->all(), [ // Validate the input from new report format form
+            'title' => 'required|max:255',
+            'description' => 'required|max:255'
+        ]);
+
+        if($validate->fails()){ // Fire error if validation fails
+            return back()->withErrors($validate);
+        }
+
+        $report_format = ReportFormat::find($request->id);
+
+        $report_format->title = $request->title;
+        $report_format->description = $request->description;
+        $report_format->save();
+
+        if(!$report_format){ // If for some reason system feature isn't created, fire error message
+            return back()->with('failure', 'An error occured while saving report format. Fill all fields!!!');
+        }
+
+        return back()->with('success', 'Successfully updated report format '.$request->title);
     }
 
     /**
@@ -123,6 +149,8 @@ class ReportFormatController extends Controller
      * @param  int  $id
      *
      * @return Response
+     *
+     * TODO: Restrict users from deleting default report formats
      */
     public function destroy(Request $request)
     {
