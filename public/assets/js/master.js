@@ -128,6 +128,7 @@ $(document).ready(function() {
     $('#edit-report-format').on('show.bs.modal', function(e){
         $('#edit-report-format #title').val($(e.relatedTarget).data('title'));
         $('#edit-report-format #description').val($(e.relatedTarget).data('description'));
+        $('#edit-report-format #system_feature_id').select($(e.relatedTarget).data('system_feature_id'));
         $('#edit-report-format-form').submit(function(){
             var id = $('#edit-report-format #id').val($(e.relatedTarget).data('id'));
             $("#edit-report-format-form").attr("action", "report_format/" + id);

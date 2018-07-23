@@ -134,6 +134,7 @@ class ReportFormatController extends Controller
 
         $report_format->title = $request->title;
         $report_format->description = $request->description;
+        $report_format->system_feature_id = $request->system_feature_id;
         $report_format->save();
 
         if(!$report_format){ // If for some reason system feature isn't created, fire error message

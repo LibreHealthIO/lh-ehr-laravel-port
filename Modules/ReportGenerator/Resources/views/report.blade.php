@@ -12,7 +12,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedButtons">
         <ul class="navbar-nav mr-auto" style="margin-left: 500px !important">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add-report-format">Save report as</button>&nbsp;
+            @if(!$hide)
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add-report-format">Save report as</button>&nbsp;
+            @endif
             <button type="button" class="btn btn-info" onclick="printReport('report_div')">Print</button>&nbsp;
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add-system-feature">PDF</button>&nbsp;
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add-system-feature">TXT</button>&nbsp;

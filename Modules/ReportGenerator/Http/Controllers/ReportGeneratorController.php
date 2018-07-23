@@ -62,9 +62,9 @@ class ReportGeneratorController extends Controller
 
         $option_ids = serialize($option_ids);
         return response()->json([
-            'redirecturl' => $protocol_host.'/reportgenerator/report/'.$option_ids,
+            'option_ids' => $option_ids,
             'success' => 'Received Option IDs',
-            'option_ids' => $option_ids
+            'redirecturl' => $protocol_host.'/reportgenerator/report/'.$option_ids
         ]);
     }
 
@@ -72,9 +72,10 @@ class ReportGeneratorController extends Controller
      * Use option_ids from getComponents() above,
      * get data and show the generated report.
      * @param Array $option_ids : selected draggable_components
+     * @param Boolean $hide: hide or show 'Save report format' button
      * @return Response $data : holds retrieved data
      */
-    public function showReport($option_ids)
+    public function showReport($option_ids, $hide = False)
     {
         $option_ids = unserialize($option_ids);
         $notes = []; // store the notes for each dragged component.
@@ -99,14 +100,15 @@ class ReportGeneratorController extends Controller
         }
 
         // These are used in menu and the select field in the form to add new report format
-        $system_features = SystemFeature::all();
         $report_formats = ReportFormat::all();
+        $system_features = SystemFeature::all();
 
         return view('reportgenerator::report')->with([
                 'data' => $data,
+                'hide' => $hide,
                 'column_names' => $column_names,
-                'system_features' => $system_features,
                 'report_formats' => $report_formats,
+                'system_features' => $system_features,
                 'option_ids' => serialize($option_ids)
         ]);
     }
@@ -121,13 +123,13 @@ class ReportGeneratorController extends Controller
          $draggable_components = ReportFormat::find($report_format_id)->draggable_components()->get();
 
          $option_ids = [];
-         foreach ($draggable_components as $draggable_component) {
+         foreach ($draggable_components as $draggable_component) { // Get the option_ids of each $draggable_component
              $option_ids[] = $draggable_component->option_id;
          }
 
-         $option_ids = serialize($option_ids);
+         $option_ids = serialize($option_ids); // serialize option_ids in preparation for showReport method
 
-         return ReportGeneratorController::showReport($option_ids); // call showReport method above
+         return ReportGeneratorController::showReport($option_ids, True); // call showReport method above
 
      }
 

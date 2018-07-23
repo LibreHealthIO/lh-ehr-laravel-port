@@ -43,7 +43,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $system_feature->name }}</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @foreach($system_feature->report_formats as $report_format)
-                                    <a class="dropdown-item" href="#">{{ $report_format->title }}</a>
+                                    <a class="dropdown-item" href="{{ url('/reportgenerator/report_format/view/'.$report_format->id) }}">{{ $report_format->title }}</a>
                                 @endforeach
                             </div>
                         </li>
@@ -192,6 +192,14 @@
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                             <div class="form-group"><input type="hidden" name="id" id="id"></div>
                             <div class="form-group">
+                                <label for="system_feature_name">Select system feature</label>
+                                <select class="form-control" name="system_feature_id" id="system_feature_id">
+                                    @foreach($system_features as $system_feature)
+                                        <option value="{{ $system_feature->id }}">{{ $system_feature->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="title">Title</label>
                                 <input type="text" name="title" class="form-control" id="title" placeholder="Enter title">
                             </div>
@@ -206,7 +214,7 @@
                     </div>
                 </div>
             </div>
-        </div><!-- /#edit-system-feature -->
+        </div><!-- /#edit-report-format -->
 
         <!-- Delete report format modal-->
         <div class="modal fade" id="delete-report-format" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
