@@ -2,6 +2,10 @@
 
 Route::group(['middleware' => 'web', 'prefix' => 'reportgenerator', 'namespace' => 'Modules\ReportGenerator\Http\Controllers'], function()
 {
+    Route::get('pdf_report', function(){
+        return view('');
+    });
+
     Route::get('/', 'ReportGeneratorController@index');
 
     Route::get('/generate', 'ReportGeneratorController@getComponents'); // get all option_ids for selected components and call the route below

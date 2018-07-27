@@ -16,10 +16,10 @@
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add-report-format">Save report as</button>&nbsp;
             @endif
             <button type="button" class="btn btn-info" onclick="printReport('report_div')">Print</button>&nbsp;
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add-system-feature">PDF</button>&nbsp;
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add-system-feature">TXT</button>&nbsp;
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add-system-feature">CSV</button>&nbsp;
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add-system-feature">ODT</button>
+            <a type="button" class="btn btn-info" href="{{ asset('pdf_report.php') }}">PDF</a>&nbsp;
+            <button type="button" class="btn btn-info">TXT</button>&nbsp;
+            <button type="button" class="btn btn-info">CSV</button>&nbsp;
+            <button type="button" class="btn btn-info">ODT</button>
         </ul>
     </div>
 </nav><!-- /.navbar -->
