@@ -2,9 +2,7 @@
 
 Route::group(['middleware' => 'web', 'prefix' => 'reportgenerator', 'namespace' => 'Modules\ReportGenerator\Http\Controllers'], function()
 {
-    Route::get('pdf_report', function(){
-        return view('');
-    });
+    Route::get('/pdf_report', 'PdfController@index');
 
     Route::get('/', 'ReportGeneratorController@index');
 

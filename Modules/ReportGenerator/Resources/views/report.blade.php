@@ -16,7 +16,12 @@
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add-report-format">Save report as</button>&nbsp;
             @endif
             <button type="button" class="btn btn-info" onclick="printReport('report_div')">Print</button>&nbsp;
-            <a type="button" class="btn btn-info" href="{{ asset('pdf_report.php') }}">PDF</a>&nbsp;
+            <form method="get" action="{{ url('reportgenerator/pdf_report') }}">
+                @foreach($column_names as $key => $column_name)
+                    <input name="column_names[]" class="column_names" id="column_names[]" type="hidden" value="{{ $column_name }}" align="absmiddle" />
+                @endforeach
+                <button type="submit" class="btn btn-info" id="pdf-button">PDF</button>
+            </form>&nbsp;
             <button type="button" class="btn btn-info">TXT</button>&nbsp;
             <button type="button" class="btn btn-info">CSV</button>&nbsp;
             <button type="button" class="btn btn-info">ODT</button>
