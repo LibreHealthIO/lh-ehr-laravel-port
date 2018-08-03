@@ -18,7 +18,7 @@ $(function() {
       addClasses: true
   });
 
-//  var addClasses = $('.col-sm-2').draggable("option", "addClasses");
+  var addClasses = $('.col-sm-2').draggable("option", "addClasses");
 
   $('#second').droppable({
       drop: function(event, ui) { // when a component is dropped
@@ -58,6 +58,12 @@ $(function() {
           }
       }
   });
+  /* this will prevent drop on section
+       $( ".container" ).droppable({
+              drop: function( event, ui ) {
+            ui.draggable.draggable( 'option', 'revert', true );
+              }
+        });*/
 });
 
 /* This function gets the IDs of all (unique) dropped components and displays them.
