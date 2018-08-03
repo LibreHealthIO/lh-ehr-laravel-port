@@ -7,7 +7,7 @@
     <div class="container">
       <div class="alert alert-success" style="display:none"></div>
         <div class="row">
-            <div class="col-sm-6">
+            <div id="dropBox" class="col-sm-6">
                 <div id="accordion">
                     <div class="card">
                         <form id="dropForm">
@@ -19,6 +19,7 @@
                                 <div class="card-body" id="second">
                                     <p class="note">Why am I still empty?</p>
                                 </div>
+                                <ul id="selected-list"></ul>
                             </div>
                         </form>
                     </div>

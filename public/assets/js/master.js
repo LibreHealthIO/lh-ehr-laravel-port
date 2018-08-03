@@ -14,23 +14,49 @@ var IDs = []; // array to store the IDs of dropped components.
 
 $(function() {
   $('.col-sm-2').draggable({
+      revert: 'invalid',
       addClasses: true
   });
 
-  var addClasses = $('.col-sm-2').draggable("option", "addClasses");
+//  var addClasses = $('.col-sm-2').draggable("option", "addClasses");
 
   $('#second').droppable({
-    drop: function(event, ui) { // when a component is dropped
+      drop: function(event, ui) { // when a component is dropped
+          var title = $(ui.draggable).find("p").attr("title");
+          var id = (ui.draggable).attr("id");
           $(this)
             .addClass('ui-state-highlight')     // 1. add this jquery class
             .css('background-color', '#fd7e14') // 2. change 'dropbox' background color
             .find('p')                          // 3. get the text in the 'dropbox'
-            .html("Dropped " + $(ui.draggable).find("p").attr("title")) // 4. replace it with name of dropped component
+            .html("Dropped " + title) // 4. replace it with name of dropped component
             .html();
+          if(!IDs.includes(id)){ // Display component's title only if it hasn't already been dropped
+              $('#selected-list').append('<p id="removed-'+id+'"><strong>' + title + '</strong></p>'); // add the title of the dropped component at the bottom of the drop box
+          } else {
+              alert("ALERT: You can't drop a component more than once!!!")
+          }
+            //ui.draggable.draggable( 'option', 'revert', true );
           $(ui.draggable).addClass('ui-state-highlight');
-          console.log('Dragged: ' + $(ui.draggable).find("p").attr("title"));
+          console.log('Dragged: ' + title);
           IDs.push((ui.draggable).attr("id")); // Push the id of the dropped component to the IDs array
-    }
+      },
+      out: function(event, ui) { // when an accepted draggable component is dragged out of the drop box (droppable)
+          var title = $(ui.draggable).find("p").attr("title");
+          var id = (ui.draggable).attr("id");
+          $(this)
+            .removeClass('ui-state-highlight')
+            //.css('background-color', 'white')
+            .find('p')
+            .html("Removed " + title)
+            .html();
+          $(ui.draggable).removeClass('ui-state-highlight');
+          console.log('Removed: ' + title);
+          IDs.splice( IDs.indexOf(id), 1 ); // Delete draggable component when it's removed from drop box
+          $('#removed-' + id).remove(); // Delete the title of the removed component at the bottom of the drop box
+          if(jQuery.isEmptyObject(IDs)){ // Change color of drop box to white when all dragged components are removed
+              $(this).css('background-color', 'white');
+          }
+      }
   });
 });
 
