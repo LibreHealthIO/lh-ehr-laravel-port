@@ -39,6 +39,7 @@ return [
             'prefix' => '',
         ],
 
+        # Primary database connection
         'mysql' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
@@ -46,6 +47,38 @@ return [
             'database' => env('DB_DATABASE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+
+        # ReportGenerator database connection
+        'mysql_report_generator' => [
+            'driver' => 'mysql',
+            'host' => env('DB_REPORT_GENERATOR_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_REPORT_GENERATOR_DATABASE', 'forge'),
+            'username' => env('DB_REPORT_GENERATOR_USERNAME', 'forge'),
+            'password' => env('DB_REPORT_GENERATOR_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+
+        # LibreHealthEHR database connection
+        'mysql_libreehr' => [
+            'driver' => 'mysql',
+            'host' => env('DB_LIBREEHR_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_LIBREEHR_DATABASE', 'forge'),
+            'username' => env('DB_LIBREEHR_USERNAME', 'forge'),
+            'password' => env('DB_LIBREEHR_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
