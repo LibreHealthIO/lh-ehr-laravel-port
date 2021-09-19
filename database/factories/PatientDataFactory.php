@@ -5,7 +5,7 @@
 | Patient Data Factory
 |--------------------------------------------------------------------------
 |
-| Use this to generate fake data for patient_datas table. 
+| Use this to generate fake data for patient_datas table.
 | Further used in PatientDataTableSeeder.phpr.php.
 | @author Priyanshu Sinha <pksinha217@gmail.com>
 |
