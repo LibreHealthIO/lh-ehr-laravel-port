@@ -1,4 +1,4 @@
-# lh-ehr-laravel-port
+# lh-ehr-laravel-port **DEPRECATED in favor of https://github.com/LibreHealthIO/lh-ehr-laravel
 LibreHealth EHR - Porting main LibreEHR codebase to Laravel framework.
 
 # Welcome to LibreHealth Laravel Port
